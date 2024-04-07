@@ -1,0 +1,7 @@
+{
+  "devDependencies": {
+    "mdx-deck": "^4.1.1"
+  }  ,"scripts": {
+    "start": "mdx-deck oop.mdx"
+  }
+}

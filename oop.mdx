@@ -1,0 +1,271 @@
+
+## Lớp và đối tượng
+* Là thành phần cơ bản của OOP
+* Một đối tượng là 1 thực thể
+* Một đối tượng sẽ thuộc một lớp
+---
+### Đối tượng
+* Trạng thái
+* Hành vi
+* Định danh
+---
+# Lớp
+1. Access Modifiers (public/protected/private/internal)
+2. Từ khóa "Class"
+3. Tên lớp
+4. Lớp cha (base)
+5. Danh sách kế thừa, implement
+6. Thân lớp
+
+---
+#### Định nghĩa một lớp
+```
+public class Dog {
+    String name { get; set; }
+    String breed  { get; set; }
+    int age { get; set; }
+    String color { get; set; }
+    // Constructor Declaration of Class
+    public Dog(String name, String breed,
+                  int age, String color)
+    {
+        this.name = name;
+    }
+    public String GetName()
+    {
+        return name;
+    }
+    public String ToString()
+    {
+        return ("Hi my name is " + this.GetName()
+                + ".\nMy breed, age and color are " + this.breed() 
+                + ", " + this.age() + ", " + this.color());
+    }
+}
+
+```
+---
+# Tạo một đối tượng thuộc lớp Dog
+```
+ public static void Main(String[] args)
+    {
+         
+        // Creating object
+        Dog tuffy = new Dog("tuffy");
+        Console.WriteLine(tuffy.ToString());
+    }
+```
+---
+# Encapsulation & Access Modifiers
+1. Private (Trong một thực thể)
+2. Protected (Trong một thực thể, có thể được kế thừa bởi các lớp con)
+3. Internal (Cùng assembly/ Project)
+4. Public (Mọi nơi)
+---
+# Hàm khởi tạo (Constructors)
+
+1. Mặc định/ Không tham số (Default)
+2. Có tham số
+3. Copy
+4. Private
+5. Static
+---
+```
+class geeks {
+    // It is invoked before the first
+    // instance constructor is run.
+    static geeks()
+    {
+ 
+        // The following statement produces
+        // the first line of output,
+        // and the line occurs only once.
+        Console.WriteLine("Static Constructor");
+    }
+
+    // Instance constructor.
+    public geeks(int i)
+    {
+        Console.WriteLine("Instance Constructor " + i);
+    }
+ 
+    // Instance method.
+    public string geeks_detail(string name, int id)
+    {
+        return "Name:" + name + " id:" + id;
+    }
+}
+
+```
+---
+```
+    // Main Method
+    public static void Main()
+    {
+ 
+        // Here Both Static and instance
+        // constructors are invoked for
+        // first instance
+        geeks obj = new geeks(1);
+ 
+        Console.WriteLine(obj.geeks_detail("GFG", 1));
+ 
+        // Here only instance constructor
+        // will be invoked
+        geeks obj1 = new geeks(2);
+ 
+        Console.WriteLine(obj1.geeks_detail("GeeksforGeeks", 2));
+    }
+```
+---
+# Tính kế thừa
+---
+## Kế thừa đơn
+Kế thừa từ một lớp cha, có thể sử dụng các thuộc tính protected, public và internal
+```
+class derived-class : base-class  
+{  
+   // methods and fields  
+   .
+   .
+} 
+```
+---
+```
+class GFG {
+   // data members
+    public string name;
+    public string subject;
+     public void readers(string name, string subject)
+    {
+        this.name = name;
+        this.subject = subject;
+        Console.WriteLine("Myself: " + name); 
+        Console.WriteLine("My Favorite Subject is: " + subject);
+    }
+}
+// inheriting the GFG class using : 
+class GeeksforGeeks : GFG {
+  
+    // constructor of derived class
+    public GeeksforGeeks()
+    {
+        Console.WriteLine("GeeksforGeeks");
+    }
+}
+```
+---
+## Kế thừa đa cấp
+- Từ một lớp con kế thừa lại từ một con khác
+- Có thể truy cập được vào phần tử protected ở mọi lớp cha
+---
+# Tính trừu tượng
+- Chỉ cho thấy thông tin cần thiết
+- Chỉ định các thuộc tính/ hành vi cần thiết của một lớp
+- Không chỉ định cụ thể cách thực hiện
+- Không thể tạo một instance từ một lớp/ interface trừu tượng
+- Không thể là static hoặc sealed
+---
+## Lớp trừu tượng
+- Các hàm virtual có thể được override
+- Không bắt buộc override các hàm virtual
+- Bắt buộc override các hàm abstract
+- abstract sẽ không có thân hàm, ngược lại virtual sẽ có
+- Lớp chỉ gồm các abstract method là lớp trừu tượng thuần (pure abstract class)
+---
+#### Lớp trừu tượng
+```
+abstract class Shape {
+    // abstract method
+    public abstract int area();
+}
+ 
+class Square : Shape {
+    // private data member
+    private int side;
+    // method of  square class
+    public Square(int x = 0)
+    {
+        side = x;
+    }
+    // overriding of the abstract method of Shape
+    public override int area()
+    {
+        Console.Write("Area of Square: ");
+        return (side * side);
+    }
+}
+```
+---
+## Interface
+- Một class có thể implement nhiều interface
+- Chỉ định các hàm và tính chất của chúng và không có thân hàm
+- Từ C# 8 hàm sẽ có thân hàm
+- Các class implement interface bắt buộc phải override lại mọi hàm
+- Các hàm default sẽ là hành vi mặc định mà các class implement sẽ không cần phải override
+- Từ C# 11 các interface có thể có các hàm static abstract và static virtual
+---
+## Interface
+```
+interface ISampleInterface
+{
+    void SampleMethod();
+}
+
+class ImplementationClass : ISampleInterface
+{
+    // Explicit interface member implementation:
+    void ISampleInterface.SampleMethod()
+    {
+        // Method implementation.
+    }
+
+    static void Main()
+    {
+        // Declare an interface instance.
+        ISampleInterface obj = new ImplementationClass();
+
+        // Call the member.
+        obj.SampleMethod();
+    }
+}
+```
+---
+# Tính đa hình
+- Từ nhiều đối tượng con có thể gọi được hành vi của đối tượng cha
+- Hành vi ở đối tượng cha được ghi đè khi được kế thừa bởi con
+- Trùng tên hàm nhưng khác phương thức thực thi
+- Method Overriding và Method Overloading
+---
+# Method Overloading
+- Chồng lặp toán tử
+- Còn được gọi là đa hình tĩnh
+- Các hàm trùng tên nhưng tùy biến truyền vào sẽ có cách thực thi khác nhau
+- Được xác định ở thời điểm biên dịch
+---
+# Method Overriding
+- Các hàm trùng tên, tham số và kiểu trả về được ghi đè 
+- Ghi đè abstract member
+- Ghi đè virtual member (Tương tự với ví dụ của abstract)
+```
+    Parent A = new Child();
+    A.Method(); // Sẽ gọi Child.Method();
+    abstract class Parent { public abstract void Method(); }
+    class Children : Parent { public void Method() { Console.WriteLine("Child")}; }
+```
+---
+# Method Overriding
+- Ghi đè hàm đã định nghĩa ở interface dù có hoặc không có thân hàm
+```
+IAnimal a = new Animal();
+a.Sound(); // Bork
+interface IAnimal{
+    void Sound();
+}
+
+class Animal: IAnimal{
+    public void Sound(){
+        Console.WriteLine("Bork");
+    }
+}
+```
